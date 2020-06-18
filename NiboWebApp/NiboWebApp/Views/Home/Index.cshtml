@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+	<div class="col-md-3">
+		<h2>Join OFX files!</h2>
+		@using (Html.BeginForm("Index",
+					   "Home",
+					   FormMethod.Post,
+					   new { enctype = "multipart/form-data" }))
+		{
+			<label for="file">Upload:</label>
+			<input type="file" name="files" id="files" multiple accept=".ofx"/><br><br>
+			<input type="submit" value="Send file" />
+			<br><br>
+			@ViewBag.Message
+		}
+	</div>
+</div>
