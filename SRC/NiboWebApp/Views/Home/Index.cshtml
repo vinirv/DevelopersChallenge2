@@ -1,0 +1,53 @@
+﻿@using Business;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Join OFX files!</h2>
+    </div>
+</div>
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="input-group">
+            <input type="file" class="form-control" name="files" id="files" multiple accept=".ofx">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Upload</button>
+            </span>
+        </div>
+    </div>
+}
+
+@if (ViewBag.uniqueTransactions != null)
+{
+    <hr>
+    <h2>List of unique transactions</h2>
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Memo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (STMTTRN transaction in ViewBag.uniqueTransactions)
+                    {
+                        <tr>
+                            <td>@transaction.TRNTYPE</td>
+                            <td>@transaction.DTPOSTED</td>
+                            <td>@transaction.TRNAMT</td>
+                            <td>@transaction.MEMO</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
